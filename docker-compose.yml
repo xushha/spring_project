@@ -1,15 +1,39 @@
 version: '3.8'
 
 services:
+  postgres:
+    image: postgres:16
+    container_name: demo_postgres
+    environment:
+      POSTGRES_DB: flights_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 1234
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
   web:
     build:
-
       context: .
       dockerfile: Dockerfile
+
+    container_name: my-spring-web-app
 
     ports:
       - "8080:8080"
 
-    container_name: my-spring-web-app
+    depends_on:
+      - postgres
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/flights_db
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: 1234
+      SPRING_JPA_HIBERNATE_DDL_AUTO: validate
+      SPRING_FLYWAY_ENABLED: "true"
 
     restart: always
+
+volumes:
+  postgres_data:

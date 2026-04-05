@@ -1,56 +1,105 @@
 package com.example.demo.model;
 
-import java.time.LocalDateTime;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+import java.time.OffsetDateTime;
+
+@Entity
+@Table(name = "flight")
 public class Flight {
 
-    private Long id;
-    private String departure;
-    private String arrival;
-    private LocalDateTime departureDateTime;
-    private LocalDateTime arrivalDateTime;
-    private double price;
+    @Id
+    @Column(name = "flight_id")
+    private String flightId;
+
+    @Column(name = "departure_city_id", nullable = false)
+    private String departureCityId;
+
+    @Column(name = "arrival_city_id", nullable = false)
+    private String arrivalCityId;
+
+    @Column(name = "departure_time", nullable = false)
+    private OffsetDateTime departureTime;
+
+    @Column(name = "arrival_time", nullable = false)
+    private OffsetDateTime arrivalTime;
+
+    @Column(name = "flight_number", nullable = false, unique = true)
     private String flightNumber;
-    private LocalDateTime creationDate;
+
+    @Column(name = "price", nullable = false)
+    private String price;
+
+    @Column(name = "created_at", nullable = false)
+    private OffsetDateTime createdAt;
 
     public Flight() {
     }
 
-    public Flight(Long id, String departure, String arrival,
-                  LocalDateTime departureDateTime, LocalDateTime arrivalDateTime,
-                  double price, String flightNumber, LocalDateTime creationDate) {
-        this.id = id;
-        this.departure = departure;
-        this.arrival = arrival;
-        this.departureDateTime = departureDateTime;
-        this.arrivalDateTime = arrivalDateTime;
-        this.price = price;
-        this.flightNumber = flightNumber;
-        this.creationDate = creationDate;
+    public String getFlightId() {
+        return flightId;
     }
 
+    public void setFlightId(String flightId) {
+        this.flightId = flightId;
+    }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public String getDepartureCityId() {
+        return departureCityId;
+    }
 
-    public String getDeparture() { return departure; }
-    public void setDeparture(String departure) { this.departure = departure; }
+    public void setDepartureCityId(String departureCityId) {
+        this.departureCityId = departureCityId;
+    }
 
-    public String getArrival() { return arrival; }
-    public void setArrival(String arrival) { this.arrival = arrival; }
+    public String getArrivalCityId() {
+        return arrivalCityId;
+    }
 
-    public LocalDateTime getDepartureDateTime() { return departureDateTime; }
-    public void setDepartureDateTime(LocalDateTime departureDateTime) { this.departureDateTime = departureDateTime; }
+    public void setArrivalCityId(String arrivalCityId) {
+        this.arrivalCityId = arrivalCityId;
+    }
 
-    public LocalDateTime getArrivalDateTime() { return arrivalDateTime; }
-    public void setArrivalDateTime(LocalDateTime arrivalDateTime) { this.arrivalDateTime = arrivalDateTime; }
+    public OffsetDateTime getDepartureTime() {
+        return departureTime;
+    }
 
-    public double getPrice() { return price; }
-    public void setPrice(double price) { this.price = price; }
+    public void setDepartureTime(OffsetDateTime departureTime) {
+        this.departureTime = departureTime;
+    }
 
-    public String getFlightNumber() { return flightNumber; }
-    public void setFlightNumber(String flightNumber) { this.flightNumber = flightNumber; }
+    public OffsetDateTime getArrivalTime() {
+        return arrivalTime;
+    }
 
-    public LocalDateTime getCreationDate() { return creationDate; }
-    public void setCreationDate(LocalDateTime creationDate) { this.creationDate = creationDate; }
+    public void setArrivalTime(OffsetDateTime arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
+    public String getFlightNumber() {
+        return flightNumber;
+    }
+
+    public void setFlightNumber(String flightNumber) {
+        this.flightNumber = flightNumber;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public OffsetDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(OffsetDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 }
