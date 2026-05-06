@@ -1,0 +1,19 @@
+package com.example.demo.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "roles")
+public class Role {
+
+    @Id
+    private Long id;
+
+    private String name;
+
+    public Role() {}
+
+    public String getName() {
+        return name;
+    }
+}

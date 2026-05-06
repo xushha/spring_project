@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.City;
 import com.example.demo.service.CityService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class CityController {
         this.cityService = cityService;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping
     public List<City> getAllCities() {
         return cityService.getAllCities();

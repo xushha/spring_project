@@ -1,7 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.UserProfile;
-import com.example.demo.service.UserProfileService;
+import com.example.demo.model.User;
+import com.example.demo.repository.UserRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,19 +11,21 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserProfileService userProfileService;
+    private final UserRepository userRepository;
 
-    public UserController(UserProfileService userProfileService) {
-        this.userProfileService = userProfileService;
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
-    public List<UserProfile> getAllUsers() {
-        return userProfileService.getAllUsers();
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
-    public UserProfile getUserById(@PathVariable String id) {
-        return userProfileService.getUserById(id);
+    public User getUserById(@PathVariable Long id) {
+        return userRepository.findById(id).orElse(null);
     }
 }
