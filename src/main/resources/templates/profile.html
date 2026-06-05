@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Profile</title>
+</head>
+<body>
+<h1>OIDC Profile</h1>
+
+<p>Name: <span th:text="${name}"></span></p>
+<p>Email: <span th:text="${email}"></span></p>
+<p>Subject: <span th:text="${subject}"></span></p>
+
+<a href="/logout">Logout</a>
+</body>
+</html>

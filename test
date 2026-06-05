@@ -1,0 +1,1 @@
+System.out.println(new BCryptPasswordEncoder().encode("admin123"));
